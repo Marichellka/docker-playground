@@ -9,4 +9,4 @@ To push an image on public repository:
 docker push marichellka/node-app-devops:latest
 
 To run container using "marichellka/node-app-devops" image on the port with memory limit 512Mb and cpu limit 2:
-docker run -p 8080:8080 -m 512m --cpus=2 marichellka/node-app-devops
+docker run -p 80:80 -m 512m --cpus=2 marichellka/node-app-devops
