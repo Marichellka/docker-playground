@@ -1,0 +1,34 @@
+name: CI-CD
+on:
+  push:
+    branches: [ main ]
+jobs:
+  format_check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+          cache: 'npm'
+      - run: npm ci && npm run format
+    
+  build:
+    needs: format_check
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_TOKEN }} docker.io
+      
+      - name: build docker image
+        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-devops .
+
+  push:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: push docker image
+        run: docker push marichellka/node-app-devops:latest
+      
