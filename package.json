@@ -1,17 +1,17 @@
 {
-    "name": "docker-demo",
-    "version": "1.0.0",
-    "description": "",
-    "main": "app.js",
-    "scripts": {
-      "start": "node src/app.js",
-      "format": "prettier . --ignore-path .gitignore"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-      "express": "^4.17.1",
-      "prettier": "^2.4.1"
-    }
+  "name": "docker-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "format": "prettier . --ignore-path .gitignore"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "prettier": "^2.4.1"
+  }
 }
