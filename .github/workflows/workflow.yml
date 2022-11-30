@@ -23,14 +23,21 @@ jobs:
 
     steps:
       - uses: actions/checkout@v2
-      - uses: actions/cache@v2
 
       - name: login to Docker Hub
         run: docker login -u "${{ secrets.DOCKERHUB_USERNAME }}" -p "${{ secrets.DOCKERHUB_TOKEN }}" docker.io
       
       - name: build docker image
-        run: docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-devops .
+        run: |
+          docker build -t ${{ secrets.DOCKERHUB_USERNAME }}/node-app-devops --output type=tar,dest=out.tar . 
+          pwd
+          ls 
       
+      - name: upload artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: image
+          path: /out
       
       
   push:
@@ -38,8 +45,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/cache@v2
+      - name: download artifact
+        uses: actions/download-artifact@v2
+        with:
+          name: image
+          path: /out
 
-      - name: push docker image
-        run: docker push marichellka/node-app-devops:latest
+      - name: load and push docker image
+        run: |
+          docker load --input /out
+          docker push ${{ secrets.DOCKERHUB_USERNAME }}/node-app-devops:latest 
       
