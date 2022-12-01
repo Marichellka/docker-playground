@@ -46,7 +46,7 @@ jobs:
       
       - name: run 
         run: |
-          docker run -p 0.0.0.0:80:80 -d marichellka/node-app-devops
+          docker run -p 80:80 -d marichellka/node-app-devops
           docker container ls
           curl 0.0.0.0:80
       

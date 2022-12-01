@@ -6,4 +6,4 @@ app.get('/', (req, res ) =>
 
 const port = process.env.PORT || 80;
 
-app.listen(port, () => console.log(`app listening on http://localhost:${port}`) );
+app.listen(port, '0.0.0.0', () => console.log(`app listening on http://localhost:${port}`) );
